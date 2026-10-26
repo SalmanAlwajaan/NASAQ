@@ -17,5 +17,5 @@ window.SITE_CONFIG = {
   ownerEmail: 'Salman.k.alwajaan@gmail.com',
   ownerName: 'سلمان',
   siteUrl: '',
-  emailjs: { publicKey: 'XrFD-ApsVpFwlINJS', serviceId: 'service_galox6', templateId: 'service_galox6' }
+  emailjs: { publicKey: 'XrFD-ApsVpFwlINJS', serviceId: 'service_galoxon', templateId: 'service_galox6' }
 };
