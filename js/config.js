@@ -13,9 +13,9 @@
 
    3) siteUrl: رابط موقعك بعد الرفع (يُستخدم لصور المنتج داخل الإيميل). */
 window.SITE_CONFIG = {
-  web3formsKey: '',
+  web3formsKey: '36f1877b-a675-4bcb-84f7-9fcc1c080c25',
   ownerEmail: 'Salman.k.alwajaan@gmail.com',
   ownerName: 'سلمان',
   siteUrl: '',
-  emailjs: { publicKey: '', serviceId: '', templateId: '' }
+  emailjs: { publicKey: 'XrFD-ApsVpFwlINJS', serviceId: 'service_galox6n', templateId: 'service_galox6n' }
 };
