@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>اطلب الجهاز، فأرة ثلاثية الأبعاد</title>
+<meta name="description" content="اطلب نسختك من الفأرة ثلاثية الأبعاد السعودية. اكتب اسمك وإيميلك وعدد القطع واللون، ويوصلك رد مباشر على إيميلك.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/site.css">
+<script src="js/theme.js"></script>
+<script src="js/logo.js" defer></script>
+<style>
+.order{padding:64px 0 96px}
+.order-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:40px 72px;align-items:start}
+.order h1{font-size:clamp(36px,5vw,56px);font-weight:700;margin-bottom:16px}
+.order .lead{margin-bottom:28px}
+.aside-list{margin:0;padding:0;list-style:none;font-family:var(--sans);font-size:16px;line-height:1.7}
+.aside-list li{padding:12px 0;border-top:1px solid var(--line)}
+.aside-list li:last-child{border-bottom:1px solid var(--line)}
+.aside-list b{display:block;font-weight:700}
+.aside-list span{font-weight:300;color:var(--fg-2)}
+.form{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:34px 36px;box-shadow:0 10px 40px var(--shadow)}
+.form h2{font-family:var(--sans);font-weight:700;font-size:17px;margin:0 0 22px;color:var(--fg)}
+.form h2.mt{margin-top:34px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:0 18px}
+.qty{display:flex;align-items:center;gap:0;width:fit-content;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--card)}
+.qty button{width:44px;height:46px;border:0;background:var(--bg-2);cursor:pointer;font-family:var(--sans);font-size:22px;line-height:1;color:var(--fg);transition:background .2s,transform .15s}
+.qty button:hover{background:var(--surface)}
+.qty button:active{transform:scale(.9)}
+.qty input{width:70px;border:0;text-align:center;font-size:18px;padding:10px 0;border-radius:0}
+.qty input:focus{outline:none}
+.submit{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-top:30px}
+.submit .note{font-family:var(--sans);font-weight:300;font-size:14px;color:var(--fg-2);line-height:1.6;max-width:36ch}
+.form .status{display:none;margin-top:18px;padding:14px 16px;border-radius:var(--r);font-family:var(--sans);font-size:15.5px;line-height:1.6}
+.form .status.err{display:block;background:#F6E4E0;color:#8C3B2E;border:1px solid #E3B9B0}
+.done{display:none;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:40px 36px;animation:pop .6s var(--ease)}
+@keyframes pop{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.done h2{font-size:34px;font-weight:700;margin-bottom:12px}
+.done p{font-size:19px}
+.done .again{margin-top:22px}
+body.sent .form{display:none}
+body.sent .done{display:block}
+.btn[disabled]{opacity:.6;cursor:wait}
+.models{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.models label{position:relative;display:grid;grid-template-columns:72px 1fr auto;align-items:center;gap:14px;padding:10px 14px 10px 12px;border:1px solid var(--line);border-radius:12px;background:var(--card);cursor:pointer;
+  transition:transform .3s var(--ease),border-color .25s,box-shadow .3s var(--ease),background .25s}
+.models label:hover{transform:translateY(-2px);border-color:var(--accent);box-shadow:0 8px 20px var(--shadow)}
+.models label:active{transform:translateY(0) scale(.98)}
+.models label:has(input:checked){border-color:var(--mid);background:var(--accent-soft)}
+.models label:has(input:focus-visible){box-shadow:0 0 0 4px var(--ring)}
+.models input{position:absolute;opacity:0;width:0;height:0;margin:0}
+.models img{width:72px;height:54px;object-fit:cover;border-radius:6px;background:var(--bg)}
+.models .dark{display:none}
+:root[data-theme="dark"] .models .light{display:none}
+:root[data-theme="dark"] .models .dark{display:block}
+.models .mn{font-family:var(--display);font-weight:900;font-size:24px}
+.models .mp{font-family:var(--display);font-weight:300;font-size:20px;font-feature-settings:"salt" 1,"lnum" 1;white-space:nowrap}
+.total{display:flex;justify-content:space-between;align-items:baseline;margin-top:26px;padding-top:18px;border-top:1px solid var(--line);font-family:var(--sans);font-size:16px}
+.total b{font-family:var(--display);font-weight:300;font-size:30px;font-feature-settings:"salt" 1,"lnum" 1}
+@media (max-width:520px){.models{grid-template-columns:1fr}}
+@media (max-width:860px){.order-grid{grid-template-columns:1fr}.form{padding:26px 22px}.row2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="نَسَق، الصفحة الرئيسية">
+      <svg class="orbit-mark" viewBox="0 0 40 40" aria-hidden="true">
+        <ellipse class="ring" cx="20" cy="20" rx="17" ry="6.5" transform="rotate(-28 20 20)" fill="none" stroke="currentColor" stroke-width="1.3" opacity=".7"/>
+        <circle cx="20" cy="20" r="8.6" fill="currentColor"/>
+        <circle cx="20" cy="20" r="4.4" fill="none" stroke="var(--bg)" stroke-width="1" opacity=".6"/>
+        <g class="sat"><rect x="-3.4" y="-2.3" width="6.8" height="4.6" rx="1.8" fill="var(--mid)"/><circle cx="0" cy="-2.1" r="1.6" fill="currentColor"/></g>
+      </svg>
+      <span class="name">نَسَق</span>
+    </a>
+    <nav class="nav" aria-label="أقسام الموقع">
+      <a href="index.html#madar">مدار</a>
+      <a href="index.html#salma">سلمى</a>
+      <a href="index.html#journey">الرحلة</a>
+      <a href="index.html#software">البرامج</a>
+      <a class="cta" href="shop.html">المتجر</a>
+    </nav>
+    <div class="tools">
+      <button class="icon-btn" id="themeBtn" type="button" aria-label="تبديل الوضع الليلي">
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+      <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-label="القائمة" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="order">
+  <div class="wrap order-grid">
+    <div>
+      <h1 class="fatha-3">اطلُب نسخَـــتك</h1>
+      <p class="lead">الجهاز ينطبع ويتجمّع حسب الطلب، واحد واحد. اكتب بياناتك، وأول ما يوصلني الطلب يوصلك رد على إيميلك بتفاصيله.</p>
+      <ul class="aside-list">
+        <li><b>وش يصير بعد الإرسال</b><span>الطلب يوصلني أنا مباشرة، ويوصلك إيميل باسمك وتفاصيل طلبك في نفس اللحظة.</span></li>
+        <li><b>التعديل على الطلب</b><span>رد على الإيميل اللي يوصلك وقل وش تبي تغير، ما يحتاج تعبي النموذج مرة ثانية.</span></li>
+        <li><b>بياناتك</b><span>الاسم والإيميل يُستخدمان للتواصل حول طلبك فقط. التفاصيل في <a href="privacy.html">سياسة الخصوصية</a>.</span></li>
+      </ul>
+    </div>
+
+    <div>
+      <form class="form" id="orderForm" novalidate>
+        <h2>الجهاز</h2>
+        <div class="field" id="modelField">
+          <div class="models">
+            <label><input type="radio" name="model" value="madar" checked><span><img class="light" src="img/product-madar-light.png" alt=""><img class="dark" src="img/product-madar-dark.png" alt=""></span><span class="mn">مدار</span><span class="mp">249 ر.س</span></label>
+            <label><input type="radio" name="model" value="salma"><span><img class="light" src="img/product-salma-light.png" alt=""><img class="dark" src="img/product-salma-dark.png" alt=""></span><span class="mn">سلمى</span><span class="mp">399 ر.س</span></label>
+          </div>
+        </div>
+
+        <h2 class="mt">بياناتك</h2>
+        <div class="row2">
+          <label class="field"><span>الاسم الكامل</span><input type="text" name="name" autocomplete="name" required maxlength="80"><em class="err">اكتب اسمك عشان نعرف نخاطبك.</em></label>
+          <label class="field"><span>رقم الجوال (اختياري)</span><input type="tel" name="phone" autocomplete="tel" inputmode="tel" maxlength="20" dir="ltr"></label>
+        </div>
+        <label class="field"><span>البريد الإلكتروني</span><input type="email" name="email" autocomplete="email" inputmode="email" required maxlength="120" dir="ltr"><em class="help">نرسل تأكيد الطلب على هذا البريد مباشرة بعد الإرسال.</em><em class="err">البريد غير مكتمل. تأكد إنه بصيغة name@example.com.</em></label>
+
+        <h2 class="mt">الطلب</h2>
+        <div class="field">
+          <span>عدد القطع</span>
+          <div class="qty">
+            <button type="button" data-step="-1" aria-label="أنقص واحد">&minus;</button>
+            <input type="number" name="qty" value="1" min="1" max="20" inputmode="numeric" aria-label="عدد القطع">
+            <button type="button" data-step="1" aria-label="زد واحد">+</button>
+          </div>
+          <em class="err">العدد لازم يكون بين 1 و20. للكميات الأكبر راسلني مباشرة.</em>
+        </div>
+        <div class="field" id="colorField">
+          <span>اللون</span>
+          <div class="colorpick" id="colorPick"></div>
+          <em class="help">اللون نفسه للهيكل والمقبض والمفاتيح، كما شفته في المتجر.</em>
+        </div>
+        <label class="field"><span>ملاحظات (اختياري)</span><textarea name="notes" maxlength="600" placeholder="أي شي تبيني أعرفه عن طلبك."></textarea></label>
+
+        <div class="total"><span>الإجمالي</span><b id="total">249 ر.س</b></div>
+        <div class="submit">
+          <button class="btn big" type="submit" id="submitBtn">أرسل الطلب</button>
+          <span class="note">بالإرسال توافق على <a href="terms.html">الشروط والأحكام</a>.</span>
+        </div>
+        <div class="status" id="formStatus" role="alert"></div>
+      </form>
+
+      <div class="done" id="done">
+        <h2 id="doneTitle">وصلني طلبك</h2>
+        <p id="doneText"></p>
+        <p class="muted" id="doneNote" style="font-size:16px">إذا ما وصلك الإيميل خلال دقائق، شيّك على مجلد الرسائل غير المرغوبة.</p>
+        <a class="btn ghost again" href="index.html">ارجع للصفحة الرئيسية</a>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>نَسَق: مدار وسلمى، فأرتان ثلاثيتا الأبعاد.</span>
+    <nav>
+      <a href="terms.html">الشروط والأحكام</a>
+      <a href="privacy.html">سياسة الخصوصية</a>
+      <a href="index.html">الصفحة الرئيسية</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="js/config.js"></script>
+<script src="js/products.js"></script>
+<script src="js/order.js"></script>
+</body>
+</html>
